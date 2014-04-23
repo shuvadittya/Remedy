@@ -1,0 +1,35 @@
+BNF definition of the Roman numerals:
+
+a ::= hundred  ten  unit
+hundred ::= ε | C
+ten ::= recurTen | XL | XC | L recurTen
+recurTen ::= ε | recurTen X
+unit ::= recurUnit | IV | V recurUnit| IX
+recurUnit ::= ε | recurUnit I
+
+Denotational semantics for Roman numerals
+
+[[ b   c   d]] = hundreds[[s]] + tens [[t]]  + units [[u]]
+
+hundreds [[ε]] = 0
+hundreds [[C]] = 100
+
+tens [[y]] = recurTens [[Y]]
+tens [[L y]] = 50 + recurTens[[Y]]
+tens [[XL]] = 40
+tens [[XC]] = 90
+
+recurTens[[ε]] = 0
+recurTens[[y X]] = recurTens[[Y]] + 10 
+
+units[y] = recurUnits[[Y]]
+units [[IV]] = 4
+units [[IX]] 9
+units [[V y]] =5 + recurUnits[[Y]]
+
+recurUnits[[ε]] = 0
+recurUnits[[y I]] = recurUnits[[Y]] + 1
+
+
+
+ 
