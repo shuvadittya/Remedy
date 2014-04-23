@@ -27,4 +27,4 @@ reverse (j':l') ++ [j]
 
 Case done.  
 
-
+-- It took 2 hours to solve the problem
