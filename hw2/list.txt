@@ -1,0 +1,30 @@
+Theorem: For all lists l, reverse (l ++ [j] ) = j : (reverse (l))
+
+Proof: By Induction on the structure of list l
+
+Case: l = []
+
+reverse (l ++ [j] ) 
+
+=  reverse [j] 				                     by definition of (++), [] ++ l = [l]
+
+= [j]
+
+= j : (reverse (l))								 by definition of reverse and considering l=[] 
+
+
+Case l = (j':l')
+
+IH: reverse (l' ++ [j]) = j: reverse l'
+
+reverse (j':l') ++ [j] 
+
+= reverse (l ++ [j])                             by definition l =  (j':l')
+
+= j:(reverse (l))								 As, definition of reverse says l++[j] = j : (reverse (l))
+
+= j: reverse (j':l')      
+
+Case done.  
+
+
