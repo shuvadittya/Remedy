@@ -1,0 +1,33 @@
+
+Theorem: for all lists xs, sum (double xs) = 2 * sum xs. 
+
+Proof: By Induction on the structure of list xs
+
+Case: xs = []
+
+sum (double xs)
+
+=  sum (double [])                   Since xs = []
+=	sum ([])			                  
+= 2* sum ([])                        by definition anything multiply zero  is equal to zero, so we can multiuply our zero output by 2 and it remains same
+
+= 2 * sum xs
+
+Case done.						
+
+
+Case  xs = (x:xs')
+
+IH: sum (double xs') = 2 * sum (xs'). 
+
+sum (double x:xs')
+
+= (sum double x) ++ sum double (xs')    by definition of list
+
+= (sum double x) ++ 2 * sum (xs')       by IH
+
+= 2 * ((sum double x) ++ sum (xs'))      by definition of double
+= 2 * sum (x:xs')
+    
+
+Case done.
