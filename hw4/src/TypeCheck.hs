@@ -43,12 +43,10 @@ tcExp g (VarE x) =
 
 tcExp g (AbsE x t e) = 
          do {   --let g = g ++ [(x,t)]
-              v <- tcExp g e 
+              -- v <- (tcExp g e) 
           ;      case t of 
-                     BoolT ->
-                        (case v of
-                             BoolT -> do return (FunT t v)
-                             _ -> throwError $ NoRuleApplies)
+                     BoolT -> do return (FunT t BoolT)
+                           
                      _ -> throwError $ NotInScope x 
               
            } 
