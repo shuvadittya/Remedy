@@ -1,0 +1,91 @@
+1.1
+
+
+In monad.hs file the error data type is defined. ( data StlcError ...)
+
+
+TypeError would be used by the type checker to indicate that a  type in the program does not match the type the type checker expected.
+
+[showsPrec _ (TypeError t1 t2)  = showString "Expected type " .
+                                     showsPrec 1 t2 .]
+
+FunTypeError would be used by the type checker to indicate that it expected a function type but got something else.
+[showsPrec _ (FunTypeError t)   = showString "Expected function type but got type " .
+                                     showsPrec 1 t]
+
+
+1.2
+
+In syntax.hs file the are the Haskell data types that represent STLC syntax.
+
+
+Exp data types are used to represent Haskell terms.
+
+Type data type is used to represent STLC types. 
+
+
+1.3
+
+Haskell expression will be like this:
+
+throwError $ FunTypeError Type 
+
+This expression will run the following code telling that Function type was expected but a different type was given:
+
+instance Show FError where
+     showsPrec _ (FunTypeError t)   = showString "Expected function type but got type " .
+                                     showsPrec 1 t
+
+Details example of how such errors are implemented will come in question 2.
+
+
+1.4
+
+
+-n flag does no typecheck. As set in main.hs file,  Option ['n'] ["no-typecheck"] (NoArg NoTypeCheck)  "don't typecheck"..
+
+So, it gives the out without typechecking. For example, if we type, ./stlc -n test.f, without typeching it gives the output
+
+true
+false
+true
+false
+\x : Bool . x
+true
+
+
+
+The -v flag performs typechecking and is for verbose output. As set in main.hs file, [ Option ['v'] ["verbose"]      (NoArg Verbose)      "be verbose"
+
+So it checks the typechecker and gives the output based on the cases provided in Typechecker.
+
+
+1.5
+
+type Gamma = [(Var, Type)] representation is used for the G we saw in the type checking rules in lecture.
+
+tcExp function is used for typechecking. tcExp :: Gamma ->  Exp -> EvalM Type is used for typechecking.
+
+
+checkTypesEqual function is used to type check expressions that two types are equal and throws an exception if they are not
+checkTypesEqual :: Type -> Type -> EvalM ()
+checkTypesEqual t1 t2 | t1 == t2 = return ()
+checkTypesEqual t1 t2 =
+    throwError $ TypeError t1 t2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

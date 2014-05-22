@@ -31,7 +31,7 @@ eval1 (IfE t1 t2 t3) = do
     t1' <- eval1 t1
     return (IfE t1' t2 t3)
 
-{- Uncomment for EC
+
 eval1 (SuccE t1) = do
     t1' <- eval1 t1
     return (SuccE t1')
@@ -55,7 +55,7 @@ eval1 (IsZeroE (SuccE nv1)) | isNumerical nv1 =
 eval1 (IsZeroE t1) = do
     t1' <- eval1 t1
     return (IsZeroE t1')
--}
+
 
 eval1 _ =
     throwError NoRuleApplies
@@ -98,12 +98,12 @@ fvs (AppE e1 e2)    = fvs e1 ++ fvs e2
 fvs TrueE           = []
 fvs FalseE          = []
 fvs (IfE e1 e2 e3)  = fvs e1 ++ fvs e2 ++ fvs e3
-{- Uncomment for EC
+
 fvs ZeroE           = []
 fvs (SuccE e)       = fvs e
 fvs (PredE e)       = fvs e
 fvs (IsZeroE e)     = fvs e
--}
+
 
 -- subst v e1 e2 substitutes e1 for v in e2
 subst :: Var -> Exp -> Exp -> Exp
@@ -126,10 +126,11 @@ subst _ _ FalseE = FalseE
 
 subst x e (IfE e1 e2 e3) = IfE (subst x e e1) (subst x e e2) (subst x e e3)
 
-{- Uncomment for EC
+
 subst _ _ ZeroE = ZeroE
 
 subst x e1 (SuccE e2)    = SuccE (subst x e1 e2)
 subst x e1 (PredE e2)    = PredE (subst x e1 e2)
 subst x e1 (IsZeroE e2)  = IsZeroE (subst x e1 e2)
--}
+
+

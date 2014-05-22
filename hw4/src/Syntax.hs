@@ -4,9 +4,9 @@ module Syntax (
     Type(..),
     Decl(..),
     isVal,
-{- Uncomment for EC
+
     isNumerical
--}
+
   ) where
 
 newtype Var = Var { unVar :: String }
@@ -18,28 +18,33 @@ data Exp = VarE Var
          | TrueE
          | FalseE
          | IfE Exp Exp Exp
+         | ZeroE
+         | SuccE Exp
+         | PredE Exp
+         | IsZeroE Exp
 
 data Type = BoolT
           | FunT Type Type
+          | NatT
   deriving (Eq)
 
 data Decl = ExpD Exp
           | LetD Var Exp
 
-{- Uncomment for EC
+
 isNumerical :: Exp -> Bool
 isNumerical ZeroE      = True
 isNumerical (SuccE e)  = isNumerical e
 isNumerical _          = False
--}
+
 
 isVal :: Exp -> Bool
 isVal (AbsE _ _ _)       = True
 isVal TrueE              = True
 isVal FalseE             = True
-{- Uncomment for EC
+
 isVal e | isNumerical e  = True
--}
+
 isVal _                  = False
 
 instance Show Var where
@@ -68,7 +73,7 @@ instance Show Exp where
                                    showString " else " .
                                    showsPrec 1 e3
 
-{- Uncomment for EC
+
     showsPrec _ ZeroE           = showString "0"
     showsPrec p (SuccE e)
         | isNumerical e  = showAsNum e 1
@@ -83,16 +88,16 @@ instance Show Exp where
     showsPrec p (PredE e)       = showParen (p > 0) $
                                   showString "pred " . showsPrec 1 e
     showsPrec _ (IsZeroE e)     = showString "iszero " . showsPrec 1 e
--}
+
 
     showList []      = \s -> s
     showList (e:es)  = shows e . showChar '\n' . showList es
 
 instance Show Type where
     show BoolT         = "Bool"
-{- Uncomment for EC
+
     show NatT          = "Nat"
--}
+
     show (FunT t1 t2)  = show t1 ++ " -> " ++ show t2
 
 instance Show Decl where

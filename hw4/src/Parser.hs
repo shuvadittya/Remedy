@@ -94,7 +94,7 @@ parseFalseE = do
     _ <- keyword "false"
     return FalseE
 
-{- Uncomment for EC
+
 parseNatE :: Parser Exp
 parseNatE = do
     n <- many1 digit
@@ -118,7 +118,7 @@ parsePredE = parseUnop "pred" PredE
 
 parseIsZeroE :: Parser Exp
 parseIsZeroE = parseUnop "iszero" IsZeroE
--}
+
 
 parseIfE :: Parser Exp
 parseIfE = do
@@ -135,12 +135,12 @@ parseSimpleExp = parseAbsE <|>
                  parseTrueE <|>
                  parseFalseE <|>
                  parseIfE <|>
-{- Uncomment for EC
+
                  parseSuccE <|>
                  parsePredE <|>
                  parseIsZeroE <|>
                  parseNatE <|>
--}
+
                  parseVarE <|>
                  parens parseExp
 
