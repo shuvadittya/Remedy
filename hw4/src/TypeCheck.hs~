@@ -42,9 +42,12 @@ tcExp g (VarE x) =
         Nothing -> throwError $ NotInScope x
 
 tcExp g (AbsE x t e) = 
-         do {   
-               v <- (tcExp (g ++ [(x,t)]) e) 
-          ;    do return (FunT t v)                            
+         do {   --let g = g ++ [(x,t)]
+              -- v <- (tcExp g e) 
+          ;      case t of 
+                     BoolT -> do return (FunT t BoolT)
+                           
+                     _ -> throwError $ NotInScope x 
               
            } 
 
@@ -56,8 +59,7 @@ tcExp g (AppE e1 e2) =
                         FunT t1 t2 ->
                                   (case v2 of
                                        t1 -> do return t2     
-                                       t2 -> throwError $ TypeError t2 t1
-                                       _ -> throwError $ NoRuleApplies) 
+                                       t2 -> throwError $ TypeError t2 t1) 
                         _  -> throwError  $ FunTypeError v
   
             }
