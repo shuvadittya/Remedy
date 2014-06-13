@@ -1,0 +1,39 @@
+Theorem: For all lists xs and ys, reverse (xs ++ ys) = reverse ys ++ reverse xs
+
+Proof: By Induction on structure of lists xs and ys
+
+Base case: xs = [].
+
+reverse ([] ++ ys)             				
+= reverse ys 								 (By definition of ++)
+= reverse ys ++ [] 						     by definition of reverse
+= reverse ys ++ reverse []
+
+Case Done.
+
+IH: reverse (xs'  ++ ys) = reverse ys ++ reverse xs'
+
+reverse (x:xs' ++ ys)                        
+= reverse (x:(xs' ++ ys))                    associative property of ++
+= reverse (xs' ++ ys) ++ [x]                 Usging IH
+= (reverse ys ++ reverse xs') ++ [x]         associativity of ++
+= reverse ys ++ (reverse xs' ++ [x])         
+= reverse ys ++ reverse (x:xs') 
+
+Case Done
+
+
+// definitions that I used:
+
+reverse [] = []
+reverse (x:xs) = (reverse xs) ++ [x]
+[] ++ ys = ys
+(x:xs) ++ ys = x:(xs ++ ys)
+
+
+
+
+
+
+
+

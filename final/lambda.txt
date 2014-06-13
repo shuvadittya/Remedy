@@ -1,0 +1,48 @@
+2.1
+
+We know,
+ tru = \t.\f.t
+ fls = \t.\f.f
+
+logical implication in the untypes labmda calculus, 
+ imp = \p.\q. p q fls
+
+reductions:
+
+imp tru fls  ->* fls
+imp fls fls  ->* fls
+
+Details Break down:
+
+imp tru fls = (\p.\q. p q fls) (\t.\f.t) (\t.\f.f)
+            =  (\t.\f.f)
+
+
+imp fls fls = (\p.\q. p q fls)(\t.\f.f) (\t.\f.f)
+            = (\t.\f.f) 
+
+2.2
+
+Church-rosser justify our decision to use the full B-reduction strategy to reason about programs that are evaluated using the lest to right strategy Because under full beta reduction any redex can be reached any time. At each step we pick some redexm anywhere inside the term we are evaluating, and reduce it. Under full beta reduction we can start with inner most redex, then middle one and at end the outermost. 
+
+for example: (id (id (\z. idz)) -> id(id(\z.z) ->\z.z
+
+However, under the normal order strategy, the left most , outermost redex is always reduced first. Under that strategy the term above would be reduced as following:
+if(id(\z.idz)) -> id(\z.idz) ->\z.id z ->\z.z
+
+In call by value strategy, only outermost redexes are reduced and where a redex is reduced only when its right hand side has already been reduced to a value. -a term that is finished computing and cannot be reduced any further under this strategy the reduction would be as following:
+
+id(id (\z.id z)) -> id(\z. id z) -> \z.is z
+
+It is applicable to Some terms,not all terms.  we can classify them using lambda calculus.
+
+We should not be bothered by this fact that it is appliable to some terms because we can easily classify those terms.  
+
+  
+
+
+
+
+
+
+ 

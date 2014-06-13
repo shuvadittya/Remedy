@@ -1,0 +1,72 @@
+3.1
+
+Example of Stuck expression:
+
+left true
+
+right false
+
+it is stuck expression as it is meaningless. 
+
+3.2
+
+The portion of the canonical forms lemma that deals with values of type T1 + T2:
+
+"If v is a value of type Bool, then v is either true or false."
+
+
+3.3
+
+Theorem (Progress): if e is a well-typed term, that is e : t for some t, then either e is a value or there exists an e' such that e -> e'
+
+Proof: By induction on the derivation  e : T 
+
+Case T-case:
+
+We know that e = case e1 of (left x -> e2) (right y -> e3),  e1 : t1 + t2 , x : t1 , e2 : t , y : t2 , e3 : t
+
+By IH, either e1 is a value or there exists a e'1 such that e1 -> e'1
+
+if e1 is a value, then by the Canonical Forms Lemma, it must be either true or false in which case so is e.
+if e->e', then by applying E-case,
+ case e1 of (left x -> e2) (right y -> e3) -> case e'1 of (left x -> e2) (right y -> e3)
+
+So, e -> case e'1 of (left x -> e2) (right y -> e3)
+
+
+
+3.4 Theorem(Preservation): if e : T and e -> e' then e':T
+
+Proof: by induction on the derivation  e:T
+
+Case T-Case
+
+we know, e =  case e1 of (left x -> e2) (right y -> e3),  e1 : t1 + t2 , x : t1 , e2 : t , y : t2 , e3 : t
+
+By IH, e' = case e1 of (left x -> e2) (right y -> e3),  e1 : t1 + t2 , x : t1 , e2 : t , y : t2 , e3 : t
+ 
+There are 2 evaluation rules that can match:
+
+
+1. Case E -Case
+case e1 of (left x -> e2) (right y -> e3) -> case e'1 of (left x -> e2) (right y -> e3)
+ 
+Applying canonical forms lemma, we derive that if e1 is a value, then it must be true or false in which case so is e'1. 
+
+By Applying E-case, we get, if e1:T, then e':T. So, we are done.
+
+
+2. Case E -CaseLeft
+
+case (left v) of (left x -> e2) (right y -> e3) -> [x |-> v]e2 
+making the replacement in the equation, we get, 
+
+case (left v) of (left x -> e2) (right y -> e3) =  case e1 of (left x -> e2) (right y -> e3)
+by applying canonical form lemma, if e1 is a value, then according to the grammar nv::= 0, succ nv
+otherwise, if e1 -> e'1, then  e':T, when e:T. So, we are done.
+
+ 
+
+
+
+
