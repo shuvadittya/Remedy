@@ -1,10 +1,17 @@
 Read me
 
+Goals of My Project: 
+
+The main objective of my project is to develop a User Interface, that can help people in third world countries to find the right doctor quickly
+I developed a UI called Remedy that allows user to add a doctor, search doctors' information, have an appointmwnt with a doctor, 
+and add, edit, search hospital/doctors' office information 
+
+To Execute the  project
+
 1. I used TomCat Server to run it. You need to set up/configure TomCat/Similar web Server to run this web based UI.
 
 2. I used MYSQl database. You need to configure your user name and password for MYSQL from Constant.java file
 
 3. You need to create tables in database
-
 
 4. I used Eclipse IDE and here are just the code files without database.
