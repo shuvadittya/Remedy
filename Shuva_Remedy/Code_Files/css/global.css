@@ -1,0 +1,31 @@
+#register, #reset{
+	visibility :hidden;
+	position: fixed;
+	top:300px;
+} 
+#rrTable{
+	position:fixed;
+	top:300px;
+}
+
+#regLink, #resetLink{
+	text-decoration: underline;
+	color: blue;
+	cursor: pointer;
+	width: 50px;
+	
+}
+td{
+	width: 140px;
+}
+h2{
+	background: url(../images/bgOptTitle.png) no-repeat;
+}
+h4{
+	font-family:serif;
+	font-style: italic;
+	color: navy;
+}
+#loginHeader{
+	background: url(../images/bgOptTitle.png) no-repeat;
+}
